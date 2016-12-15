@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 public class AmdocsTesting {
 
     private Comprobante comprobante;
-    private final AmdocsFileAnalyser amdocsFileAnalyser = new AmdocsFileAnalyser(new File("C:\\Users\\nicolas.moreno\\IdeaProjects\\Fixer\\src\\NUEVARGAFIP112015CRM.TXT"));
+    private final AmdocsFileAnalyser amdocsFileAnalyser = new AmdocsFileAnalyser(new File("C:\\Users\\nicolas.moreno\\IdeaProjects\\Fixer\\src\\main\\resources\\files\\R37_tax_afip_sales_Ago16_01.csv"));
 
     public AmdocsTesting() throws IOException {
     }
@@ -28,8 +28,8 @@ public class AmdocsTesting {
         String correctAlicuota1 = "1,20160801,08,N,2117,00002959,CB211700002959,DNI,12616431,FAVRE ELBA BEATRIZ,-49.01,40.59,-40.59,21,-8.32,.00,.00,.00,.00,.00,.00,.00,F,PES,0001000000,2,,66317368927191,20160811,-,1560972|1560972";
         String correctAlicuota2 = "1,20160801,08,N,2117,00002959,CB211700002959,DNI,12616431,FAVRE ELBA BEATRIZ,-49.01,40.59,-40.59,10.5,-.10,.00,.00,.00,.00,.00,.00,.00,F,PES,0001000000,2,,66317368927191,20160811,-,1560972|1560972";
 
-        assertEquals(comprobante.getAlicuotas().get(0),correctAlicuota1);
-        assertEquals(comprobante.getAlicuotas().get(1),correctAlicuota2);
+        assertEquals(correctAlicuota1,comprobante.getAlicuotas().get(0));
+        assertEquals(correctAlicuota2,comprobante.getAlicuotas().get(1));
         comprobante.getAlicuotas().clear();
 
 
