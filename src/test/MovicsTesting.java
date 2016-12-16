@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class MovicsTesting {
 
     private Comprobante comprobante;
-    private final MovicsFileAnalyser movicsFileAnalyser = new MovicsFileAnalyser(new File("C:\\Users\\nicolas.moreno\\IdeaProjects\\Fixer\\src\\NUEVARGAFIP112015CRM.TXT"));
+    private final MovicsFileAnalyser movicsFileAnalyser = new MovicsFileAnalyser(new File("C:\\Users\\nicolas.moreno\\IdeaProjects\\Fixer\\src\\main\\resources\\files\\NUEVARGAFIP112015CRM.TXT"));
 
     public MovicsTesting() throws IOException {
     }
@@ -67,10 +67,10 @@ public class MovicsTesting {
     @org.junit.Test
     public void fileTesting() throws IOException {
         this.comprobante = new Comprobante();
-        FileLoader fl = new FileLoader("C:\\Users\\nicolas.moreno\\IdeaProjects\\Fixer\\src\\","NUEVARGAFIP112015CRM.TXT");
+        FileLoader fl = new FileLoader("C:\\Users\\nicolas.moreno\\IdeaProjects\\Fixer\\src\\main\\resources\\files\\","NUEVARGAFIP112015CRM.TXT");
         fl.start();
-        BufferedReader originFileReader = new BufferedReader(new InputStreamReader(new FileInputStream(new File("C:\\Users\\nicolas.moreno\\IdeaProjects\\Fixer\\src\\NUEVARGAFIP112015CRM.TXT")),"Cp1252"));
-        BufferedReader fixedFileReader = new BufferedReader(new InputStreamReader(new FileInputStream(new File("C:\\Users\\nicolas.moreno\\IdeaProjects\\Fixer\\src\\NUEVARGAFIP112015CRM.NEW")),"Cp1252"));
+        BufferedReader originFileReader = new BufferedReader(new InputStreamReader(new FileInputStream(new File("C:\\Users\\nicolas.moreno\\IdeaProjects\\Fixer\\src\\main\\resources\\files\\NUEVARGAFIP112015CRM.TXT")),"Cp1252"));
+        BufferedReader fixedFileReader = new BufferedReader(new InputStreamReader(new FileInputStream(new File("C:\\Users\\nicolas.moreno\\IdeaProjects\\Fixer\\src\\main\\resources\\files\\NUEVARGAFIP112015CRM.NEW")),"Cp1252"));
         int initFileLines = countLines(originFileReader);
         int fixedFileLines = countLines(fixedFileReader);
         System.out.println("originalFileLines " + initFileLines + " fixedFileLines " + fixedFileLines );

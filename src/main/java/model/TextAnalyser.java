@@ -18,29 +18,22 @@ public class TextAnalyser {
     public void analyse(AmdocsFileAnalyser file){
         String header = file.readLine();
         while (header != null && !(header.equals("\u0000"))){
-            //String replaceAllHeader = header.replaceAll("\u0000","");
-            //file.writeOnFixedFile(header);
             comprobante.setCabecera(header);
             comprobante.getAlicuotas().clear();
             comprobante.addAlicuota(header);
             int cantAlicuotas = Integer.parseInt((header.split(",")[25]).replaceAll("\u0000",""));
             while (cantAlicuotas > 1){
                 header = file.readLine();
-                //file.writeOnFixedFile(header);
-                comprobante.addAlicuota(header);
                     if(header.equals("\u0000")) {
                         header = file.readLine();
                         comprobante.addAlicuota((header));
-                        //file.writeOnFixedFile(header);
                     }
                 cantAlicuotas--;
             }
             header = file.readLine();
-            comprobante.addAlicuota(header);
             file.initFirstRule(comprobante);
             file.initSecondRule(comprobante);
             file.writeFinalComprobante(comprobante);
-            //file.writeOnFixedFile(header);
             if(header == null) break;
             if(header.equals("\u0000")) header = file.readLine();
         }
