@@ -56,6 +56,7 @@ public class AmdocsTesting {
 
     @org.junit.Test
     public void testFile() throws IOException {
+        // TODO: EN CASO DE HABER LA 1RA REGLA CASO B, QUE ELIMINA UNA LINEA, ESTO VA A FALLAR
         this.comprobante = new Comprobante();
         FileLoader fl = new FileLoader();
         fl.start("C:\\Users\\nicolas.moreno\\IdeaProjects\\Fixer\\src\\main\\resources\\files\\","R37_tax_afip_sales_Ago16_01.csv");

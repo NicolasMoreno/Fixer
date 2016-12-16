@@ -12,8 +12,8 @@ public class TextAnalyser {
     }
 
     /**
-     * Metodo que empieza a analizar un file y dependiendo del tipo del file ejecuta un determinado metodo
-     * @param file archivo a ser analizado
+     * Metodo que empieza a analizar un file de AMDOCS
+     * @param file Archivo amdocs a ser analizado
      */
     public void analyse(AmdocsFileAnalyser file){
         String header = file.readLine();
@@ -41,6 +41,10 @@ public class TextAnalyser {
         file.closeLogFile();
     }
 
+    /**
+     * Metodo que empieza a analizar un file de MOVICS
+     * @param file Archivo amdocs a ser analizado
+     */
     public void analyse(MovicsFileAnalyser file){
         String header = file.readLine();
         while (header != null){

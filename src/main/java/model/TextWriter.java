@@ -39,6 +39,7 @@ public class TextWriter {
         if(text.equals("\n")) logWriter.write(text);
         else logWriter.write(text+"; ");
     }
+
     public void closeLogFile(){
         logWriter.flush();
         logWriter.close();

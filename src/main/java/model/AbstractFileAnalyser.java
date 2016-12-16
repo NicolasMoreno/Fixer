@@ -20,26 +20,26 @@ abstract public class AbstractFileAnalyser {
     }
     /**
      * Metodo para ejecutar la primera regla
-     * " explicar primer regla aca "
-     * @param comprobante
-     * @return boolean si el comprobante necesita corregirse
+     * @param comprobante Aca se encuentran las lineas del file, metidas en un ArrayList de String
      */
     abstract public void initFirstRule(Comprobante comprobante);
 
     /**
      * Método para ejecutar la segunda regla
-     * @param comprobante comprobante a analizar
-     * @return boolean si el comprobante necesita corregirse
+     * @param comprobante Aca se encuentran las lineas del file, metidas en un ArrayList de String
      */
     abstract public void initSecondRule(Comprobante comprobante);
 
     /**
      * Método para ejecutar la tercera regla
-     * @param comprobante
-     * @return boolean si el comprobante necesita corregirse
+     * @param comprobante Aca se encuentran las lineas del file, metidas en un ArrayList de String
      */
     abstract public void initThirdRule(Comprobante comprobante);
 
+    /**
+     * Metodo para escribir al archivo .NEW, con el comprobante corregido
+     * @param comprobante Comprobante corregido luego de pasar por las reglas.
+     */
     abstract public void writeCorrectedComprobante(Comprobante comprobante);
 
     public BufferedReader getReader() {
