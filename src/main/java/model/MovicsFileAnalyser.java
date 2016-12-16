@@ -17,8 +17,6 @@ public class MovicsFileAnalyser extends AbstractFileAnalyser {
     private StringBuilder stringNumberParser = new StringBuilder();
 
 
-
-
     public MovicsFileAnalyser(File file) throws IOException{
         super(file);
     }
@@ -64,19 +62,7 @@ public class MovicsFileAnalyser extends AbstractFileAnalyser {
                         toCorrectCaseA(comprobante,i);
                         super.writeOnLogFile("\n");
                     }
-
                 }
-                /*if(!(alicuota.substring(comprobante.getMovicsALICUOTASFieldPositions(5)-1
-                        , comprobante.getMovicsALICUOTASFieldPositions(6)-1).equals(FOURZERO))
-                        && alicuota.endsWith(FIFTEENZERO)){
-
-                    if(cantAlicuotas > 1){
-                        toCorrectCaseB(comprobante,i);
-                    }else{
-                        toCorrectCaseA(comprobante,i);
-                    }
-                    super.writeOnLogFile("\n");
-                }*/
             }
     }
 
@@ -136,7 +122,6 @@ public class MovicsFileAnalyser extends AbstractFileAnalyser {
         super.writeOnLogFile("Viejo valor Cantidad de alícuotas de IVA = " + cantidadAlicuotas.toString());
 
         String newData = String.valueOf((importeNetoGravado+conceptosOperaciones)/100).replace(".","0");
-        //stringNumberParser.insert(0,FIFTEENZERO).replace(0,1,""+newData.charAt(0)).replace(15-newData.length(),15,newData.replace("-","0"));
         stringNumberParser.insert(0,FIFTEENZERO);
             if(newData.charAt(0) != '-') stringNumberParser.replace(15-newData.length(),15,newData );
             else stringNumberParser.replace(0,1,""+newData.charAt(0)).replace(15-newData.length(),15,newData.replace("-","0" ));

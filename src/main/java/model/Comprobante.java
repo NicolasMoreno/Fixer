@@ -11,7 +11,6 @@ public class Comprobante {
     private final int[] movicsCBTESFieldPositions = {1,9,12,13,17,37,57,59,79,109,124,125,140,155,170,185,200,
             215,230,245,248,258,259,273,281,289,297,312,324,336};
     private final int[] movicsALICUOTASFieldPositions = {1,4,8,28,48,63,67,82};
-    //private final int[] amdocsFieldPositions = { /*Positions here*/};
 
 
     private String cabecera;

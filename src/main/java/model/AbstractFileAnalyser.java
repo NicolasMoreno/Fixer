@@ -16,7 +16,6 @@ abstract public class AbstractFileAnalyser {
 
     AbstractFileAnalyser(File file) throws IOException{
         this.reader = new BufferedReader(new InputStreamReader(new FileInputStream(file),"Cp1252"));
-        //this.reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
         this.textWriter = new TextWriter(file);
     }
     /**

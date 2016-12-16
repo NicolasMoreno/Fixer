@@ -31,7 +31,7 @@ public class TextAnalyser {
                 cantAlicuotas--;
             }
             header = file.readLine();
-            file.initFirstRule(comprobante);
+            //file.initFirstRule(comprobante);
             file.initSecondRule(comprobante);
             file.writeFinalComprobante(comprobante);
             if(header == null) break;
@@ -43,7 +43,6 @@ public class TextAnalyser {
 
     public void analyse(MovicsFileAnalyser file){
         String header = file.readLine();
-        //cantidad = 0;
         while (header != null){
             comprobante.getAlicuotas().clear();
             comprobante.setCabecera(header);
@@ -52,7 +51,7 @@ public class TextAnalyser {
             for (int i = 0; i < cantAlicuotas; i++) {
                 comprobante.addAlicuota(file.readLine());
             }
-            //file.initFirstRule(comprobante);
+            file.initFirstRule(comprobante);
             file.initSecondRule(comprobante);
             file.initThirdRule(comprobante);
             file.writeFinalComprobante(comprobante);
