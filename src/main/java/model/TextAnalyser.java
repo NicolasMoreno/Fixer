@@ -31,7 +31,7 @@ public class TextAnalyser {
                 cantAlicuotas--;
             }
             header = file.readLine();
-            //file.initFirstRule(comprobante);
+            file.initFirstRule(comprobante);
             file.initSecondRule(comprobante);
             file.writeFinalComprobante(comprobante);
             if(header == null) break;
@@ -53,7 +53,7 @@ public class TextAnalyser {
             }
             file.initFirstRule(comprobante);
             file.initSecondRule(comprobante);
-            file.initThirdRule(comprobante);
+            //file.initThirdRule(comprobante);
             file.writeFinalComprobante(comprobante);
             header = file.readLine();
         }

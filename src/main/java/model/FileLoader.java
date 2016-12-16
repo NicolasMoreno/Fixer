@@ -8,20 +8,14 @@ import java.io.IOException;
  */
 public class FileLoader {
 
-    private File file;
-    private TextAnalyser textAnalyser;
+    private TextAnalyser textAnalyser = new TextAnalyser();
 
-    public FileLoader(String path, String filename){ //path and filename?
-            this.file = new File(path+filename);
-            this.textAnalyser = new TextAnalyser();
-    }
-
-    public void start() throws IOException{
-        if(file.getName().toLowerCase().contains(".csv")){
-            textAnalyser.analyse(new AmdocsFileAnalyser(file));
+    public void start(String path, String filename) throws IOException{
+        if(filename.toLowerCase().contains(".csv")){
+            textAnalyser.analyse(new AmdocsFileAnalyser(new File(path+filename)));
         }
-        else if(file.getName().toLowerCase().contains(".txt")){
-            textAnalyser.analyse(new MovicsFileAnalyser(file));
+        else if(filename.toLowerCase().contains(".txt")){
+            textAnalyser.analyse(new MovicsFileAnalyser(new File(path+filename)));
         }
     }
 }

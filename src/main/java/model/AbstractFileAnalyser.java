@@ -54,9 +54,11 @@ abstract public class AbstractFileAnalyser {
             return null;
         }
     }
+
     public void writeOnLogFile(String line){
         textWriter.writeOnLogFile(line);
     }
+
     public void closeLogFile(){
         textWriter.closeLogFile();
     }
@@ -68,6 +70,7 @@ abstract public class AbstractFileAnalyser {
             e.printStackTrace();
         }
     }
+
     public void closeFixedFile(){
         try{
             textWriter.closeFixedFile();

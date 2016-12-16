@@ -122,7 +122,7 @@ public class AmdocsFileAnalyser extends AbstractFileAnalyser {
     private void toCorrectCaseA(Comprobante comprobante, int index) {
         String splittedAlicuota[] = comprobante.getAlicuota(index).split(",");
         String name = splittedAlicuota[9];
-        super.writeOnLogFile("2da regla caso A en "+ name + " id comprobante = " + splittedAlicuota[5].replaceAll("\u0000","") );
+        super.writeOnLogFile("2da regla caso A en "+ name.replaceAll("\u0000","") + " id comprobante = " + splittedAlicuota[5].replaceAll("\u0000","") );
         BigDecimal noGravado = new BigDecimal(Double.parseDouble(splittedAlicuota[11].replaceAll("\u0000","")))
                 .add(new BigDecimal(Double.parseDouble(splittedAlicuota[12].replaceAll("\u0000","")))); //NoGravado + NetoGravado
         String newValue = noGravado.setScale(2,BigDecimal.ROUND_HALF_UP).toString();

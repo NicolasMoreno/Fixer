@@ -57,8 +57,8 @@ public class AmdocsTesting {
     @org.junit.Test
     public void testFile() throws IOException {
         this.comprobante = new Comprobante();
-        FileLoader fl = new FileLoader("C:\\Users\\nicolas.moreno\\IdeaProjects\\Fixer\\src\\main\\resources\\files\\","R37_tax_afip_sales_Ago16_01.csv");
-        fl.start();
+        FileLoader fl = new FileLoader();
+        fl.start("C:\\Users\\nicolas.moreno\\IdeaProjects\\Fixer\\src\\main\\resources\\files\\","R37_tax_afip_sales_Ago16_01.csv");
         BufferedReader originFileReader = new BufferedReader(new InputStreamReader(new FileInputStream(new File("C:\\Users\\nicolas.moreno\\IdeaProjects\\Fixer\\src\\main\\resources\\files\\R37_tax_afip_sales_Ago16_01.csv")),"Cp1252"));
         BufferedReader fixedFileReader = new BufferedReader(new InputStreamReader(new FileInputStream(new File("C:\\Users\\nicolas.moreno\\IdeaProjects\\Fixer\\src\\main\\resources\\files\\R37_tax_afip_sales_Ago16_01.NEW")),"Cp1252"));
         int initFileLines = countLines(originFileReader);
