@@ -116,7 +116,7 @@ public class AmdocsFileAnalyser extends AbstractFileAnalyser {
             splittedAlicuota[25] = fillWithNullChar(""+(cantAlicuotas/2));
             super.writeOnLogFile("Nuevo valor Cantidad Alícuotas = " + (cantAlicuotas)/2);
             String newAlicuota = Arrays.toString(splittedAlicuota).replace("[","").replace("]","").replace(" ","")
-                    .replace(name.replace(" ",""),name).replace("\u0A0D\u0D00",""); // ਍ഀ
+                    .replace(name.replace(" ",""),name); // ਍ഀ .replace("\u0A0D\u0D00","");
             comprobante.changeAlicuota(i,newAlicuota);
         }
     }

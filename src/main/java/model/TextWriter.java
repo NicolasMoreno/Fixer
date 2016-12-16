@@ -35,7 +35,8 @@ public class TextWriter {
     }
 
     public void writeOnFixedFile(String line) throws IOException {
-        fixedFileWriter.write(line+"\r\n");
+        if(line.equals("\u0000")) return;
+        fixedFileWriter.write(line+"\n");
     }
 
     public void closeFixedFile() throws IOException {
