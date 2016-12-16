@@ -12,7 +12,6 @@ public class Comprobante {
             215,230,245,248,258,259,273,281,289,297,312,324,336};
     private final int[] movicsALICUOTASFieldPositions = {1,4,8,28,48,63,67,82};
 
-
     private String cabecera;
     private ArrayList<String> alicuotas;
 
@@ -40,12 +39,15 @@ public class Comprobante {
     public List<String> getAlicuotas() {
         return alicuotas;
     }
+
     public void addAlicuota(String alicuota){
         this.alicuotas.add(alicuota);
     }
+
     public String getAlicuota(int index){
         return alicuotas.get(index);
     }
+
     public void changeAlicuota(int index,String alicuota){
         this.alicuotas.set(index,alicuota);
     }

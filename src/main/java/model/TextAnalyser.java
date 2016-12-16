@@ -33,7 +33,7 @@ public class TextAnalyser {
             header = file.readLine();
             file.initFirstRule(comprobante);
             file.initSecondRule(comprobante);
-            file.writeFinalComprobante(comprobante);
+            file.writeCorrectedComprobante(comprobante);
             if(header == null) break;
             if(header.equals("\u0000")) header = file.readLine();
         }
@@ -54,7 +54,7 @@ public class TextAnalyser {
             file.initFirstRule(comprobante);
             file.initSecondRule(comprobante);
             //file.initThirdRule(comprobante);
-            file.writeFinalComprobante(comprobante);
+            file.writeCorrectedComprobante(comprobante);
             header = file.readLine();
         }
         file.closeFixedFile();

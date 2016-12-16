@@ -40,7 +40,7 @@ abstract public class AbstractFileAnalyser {
      */
     abstract public void initThirdRule(Comprobante comprobante);
 
-    abstract public void writeFinalComprobante(Comprobante comprobante);
+    abstract public void writeCorrectedComprobante(Comprobante comprobante);
 
     public BufferedReader getReader() {
         return reader;

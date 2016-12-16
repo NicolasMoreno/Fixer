@@ -175,7 +175,7 @@ public class MovicsFileAnalyser extends AbstractFileAnalyser {
     }
 
     @Override
-    public void writeFinalComprobante(Comprobante comprobante){
+    public void writeCorrectedComprobante(Comprobante comprobante){
         super.writeOnFixedFile(comprobante.getCabecera());
         for (int i = 0; i < comprobante.getAlicuotas().size(); i++) {
             super.writeOnFixedFile(comprobante.getAlicuota(i));

@@ -61,17 +61,6 @@ public class AmdocsFileAnalyser extends AbstractFileAnalyser {
         }
     }
 
-    private String fillWithNullChar(String stringedNumber) {
-        int addedChars = 0;
-        stringBuilder.delete(0,stringBuilder.length());
-        stringBuilder.insert(0,stringedNumber);
-        for (int i = 0; i <= stringedNumber.length(); i++) {
-            stringBuilder.insert(i+addedChars,"\u0000");
-            addedChars++;
-        }
-        return stringBuilder.toString();
-    }
-
     @Override
     public void initSecondRule(Comprobante comprobante) {
         String[] splittedAlicuota;
@@ -147,9 +136,20 @@ public class AmdocsFileAnalyser extends AbstractFileAnalyser {
     }
 
     @Override
-    public void writeFinalComprobante(Comprobante comprobante) {
+    public void writeCorrectedComprobante(Comprobante comprobante) {
         for (int i = 0; i < comprobante.getAlicuotas().size(); i++) {
             super.writeOnFixedFile(comprobante.getAlicuota(i));
         }
+    }
+
+    private String fillWithNullChar(String stringedNumber) {
+        int addedChars = 0;
+        stringBuilder.delete(0,stringBuilder.length());
+        stringBuilder.insert(0,stringedNumber);
+        for (int i = 0; i <= stringedNumber.length(); i++) {
+            stringBuilder.insert(i+addedChars,"\u0000");
+            addedChars++;
+        }
+        return stringBuilder.toString();
     }
 }
