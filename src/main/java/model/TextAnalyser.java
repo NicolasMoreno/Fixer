@@ -45,6 +45,7 @@ public class TextAnalyser {
             if(header.equals("\u0000")) header = file.readLine();
         }
         file.closeFixedFile();
+        file.closeLogFile();
     }
 
     public void analyse(MovicsFileAnalyser file){
