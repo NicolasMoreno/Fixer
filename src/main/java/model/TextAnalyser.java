@@ -49,11 +49,11 @@ public class TextAnalyser {
         String header = file.readLine();
         while (header != null){
             comprobante.getAlicuotas().clear();
-            comprobante.setCabecera(header);
+            comprobante.setCabecera(header.trim());
             int cantAlicuotas = Integer.parseInt(header.substring(comprobante.getMovicsCBTESFieldPositions(10)-1
                     , comprobante.getMovicsCBTESFieldPositions(11)-1));
             for (int i = 0; i < cantAlicuotas; i++) {
-                comprobante.addAlicuota(file.readLine());
+                comprobante.addAlicuota(file.readLine().trim());
             }
             file.initFirstRule(comprobante);
             file.initSecondRule(comprobante);
