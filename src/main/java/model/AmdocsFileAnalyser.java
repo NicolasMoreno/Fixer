@@ -21,6 +21,9 @@ public class AmdocsFileAnalyser extends AbstractFileAnalyser {
     @Override
     public void initFirstRule(Comprobante comprobante) {
         int cantidadAlícuotas = (comprobante.getAlicuotas().size());
+        if(cantidadAlícuotas> 1){
+            System.out.println(cantidadAlícuotas);
+        }
         initFirstRule(comprobante,cantidadAlícuotas);
 
     }
@@ -43,7 +46,8 @@ public class AmdocsFileAnalyser extends AbstractFileAnalyser {
 
         }
 
-        if(!(totalDeOperacion.equals(sumaDeImportes))){
+        if(!(totalDeOperacion.setScale(2,BigDecimal.ROUND_HALF_UP).toString()
+                .equals(sumaDeImportes.setScale(2,BigDecimal.ROUND_HALF_UP).toString()))){
             super.writeOnLogFile("1er regla en "+ name.replaceAll("\u0000","") + " id comprobante = " + splittedAlicuota[5].replaceAll("\u0000","") );
             BigDecimal newValue = totalDeOperacion.subtract(sumaDeImportes).add(noGravado);
             String stringedNumber = newValue.setScale(2,BigDecimal.ROUND_HALF_UP).toString();
@@ -65,9 +69,12 @@ public class AmdocsFileAnalyser extends AbstractFileAnalyser {
     public void initSecondRule(Comprobante comprobante) {
         String[] splittedAlicuota;
         int cantidadAlícuotas = (comprobante.getAlicuotas().size());
+        if(cantidadAlícuotas> 1){
+            System.out.println(cantidadAlícuotas);
+        }
         for (int i = 0; i < cantidadAlícuotas; i++) {
             splittedAlicuota = comprobante.getAlicuota(i).split(",");
-            if(splittedAlicuota[14].replaceAll("\u0000","").equals(".00") && !(splittedAlicuota[10].replaceAll("\u0000","").equals(splittedAlicuota[11].replaceAll("\u0000","")))
+            if(splittedAlicuota[14].replaceAll("\u0000","").equals(".00")
                     && !(splittedAlicuota[13].replaceAll("\u0000","").equals("0"))){
                 if (cantidadAlícuotas>1) {
                     toCorrectCaseB(comprobante,i);
@@ -112,10 +119,10 @@ public class AmdocsFileAnalyser extends AbstractFileAnalyser {
         String splittedAlicuota[] = comprobante.getAlicuota(index).split(",");
         String name = splittedAlicuota[9];
         super.writeOnLogFile("2da regla caso A en "+ name.replaceAll("\u0000","") + " id comprobante = " + splittedAlicuota[5].replaceAll("\u0000","") );
-        BigDecimal noGravado = new BigDecimal(Double.parseDouble(splittedAlicuota[11].replaceAll("\u0000","")))
+        BigDecimal newNoGravado = new BigDecimal(Double.parseDouble(splittedAlicuota[11].replaceAll("\u0000","")))
                 .add(new BigDecimal(Double.parseDouble(splittedAlicuota[12].replaceAll("\u0000","")))); //NoGravado + NetoGravado
-        String newValue = noGravado.setScale(2,BigDecimal.ROUND_HALF_UP).toString();
-        if(newValue.charAt(1) == '0') newValue = newValue.replaceFirst("0","");
+        String newValue = newNoGravado.setScale(2,BigDecimal.ROUND_HALF_UP).toString();
+        if(newValue.charAt(1) == '0' || newValue.charAt(0) == '0') newValue = newValue.replaceFirst("0","");
         super.writeOnLogFile("Viejo valor No Gravado = " + splittedAlicuota[11].replaceAll("\u0000",""));
         splittedAlicuota[11] = fillWithNullChar(newValue);
         super.writeOnLogFile("Nuevo valor No Gravado = " + newValue);

@@ -13,6 +13,7 @@ public class MovicsFileAnalyser extends AbstractFileAnalyser {
 
     private final String FIFTEENZERO = "000000000000000";
     private final String FOURZERO = "0000";
+    private final String FREESPACE = "                                                                                                                                                                                                                                                                      ";
     private StringBuilder cabeceraBuilder = new StringBuilder();
     private StringBuilder stringNumberParser = new StringBuilder();
 
@@ -26,10 +27,6 @@ public class MovicsFileAnalyser extends AbstractFileAnalyser {
         stringNumberParser.delete(0,stringNumberParser.length());
         cabeceraBuilder.delete(0,cabeceraBuilder.length());
         int cantAlicuotas = comprobante.getAlicuotas().size();
-        String cabecera = comprobante.getCabecera();
-        if(cantAlicuotas > 1  && cabecera.contains("DDN BROKERS")){
-            System.out.println(cantAlicuotas);
-        }
             for (int i = 0; i < cantAlicuotas; i++) {
                 String alicuota = comprobante.getAlicuota(i);
                 if(!(alicuota.substring(comprobante.getMovicsALICUOTASFieldPositions(5)-1,comprobante.getMovicsALICUOTASFieldPositions(6)-1).equals(FOURZERO)) && alicuota.endsWith(FIFTEENZERO)){
@@ -63,12 +60,12 @@ public class MovicsFileAnalyser extends AbstractFileAnalyser {
                         ,comprobante.getMovicsCBTESFieldPositions(12)-1));
         super.writeOnLogFile("Viejo valor Conceptos/Operaciones = " + (conceptosOperaciones/100));
         //System.out.println(conceptosOperaciones.toString());
-        String newData = String.valueOf((importeNetoGravado+conceptosOperaciones)/100).replace(".","0");
+        String newData = String.valueOf((importeNetoGravado+conceptosOperaciones)).replace(".0","");
 
         stringNumberParser.insert(0,FIFTEENZERO);
                 if(newData.charAt(0) != '-') stringNumberParser.replace(15-newData.length(),15,newData );
                 else stringNumberParser.replace(0,1,""+newData.charAt(0)).replace(15-newData.length(),15,newData.replace("-","0" ));
-        super.writeOnLogFile("Nuevo valor Conceptos/Operaciones = " + (stringNumberParser));
+        super.writeOnLogFile("Nuevo valor Conceptos/Operaciones = " + String.valueOf((importeNetoGravado+conceptosOperaciones)/100));
         //System.out.println(stringNumberParser.toString());
         cabeceraBuilder.insert(0,cabecera);
         cabeceraBuilder.replace(comprobante.getMovicsCBTESFieldPositions(11)-1
@@ -97,13 +94,13 @@ public class MovicsFileAnalyser extends AbstractFileAnalyser {
         Double conceptosOperaciones = Double.parseDouble(cabecera
                 .substring(comprobante.getMovicsCBTESFieldPositions(11)-1
                         ,comprobante.getMovicsCBTESFieldPositions(12)-1));
-        super.writeOnLogFile("Viejo valor Conceptos/Operaciones = " + conceptosOperaciones.toString());
+        super.writeOnLogFile("Viejo valor Conceptos/Operaciones = " + (conceptosOperaciones/100));
         Integer cantidadAlicuotas = Integer.parseInt(cabecera
                 .substring(comprobante.getMovicsCBTESFieldPositions(10)-1
                         ,comprobante.getMovicsCBTESFieldPositions(11)-1));
         super.writeOnLogFile("Viejo valor Cantidad de alicuotas de IVA = " + cantidadAlicuotas.toString());
-
-        String newData = String.valueOf((importeNetoGravado+conceptosOperaciones)).replace(".0","");
+        double sum = (importeNetoGravado+conceptosOperaciones);
+        String newData = String.valueOf(sum).replace(".0","");
         stringNumberParser.insert(0,FIFTEENZERO);
             if(newData.charAt(0) != '-') stringNumberParser.replace(15-newData.length(),15,newData );
             else stringNumberParser.replace(0,1,""+newData.charAt(0)).replace(15-newData.length(),15,newData.replace("-","0" ));
@@ -119,7 +116,7 @@ public class MovicsFileAnalyser extends AbstractFileAnalyser {
                 ,comprobante.getMovicsCBTESFieldPositions(12)-1
                 , stringNumberParser.toString());
         comprobante.setCabecera(cabeceraBuilder.toString());
-        super.writeOnLogFile("Nuevo valor Conceptos/Operaciones = " + stringNumberParser.toString());
+        super.writeOnLogFile("Nuevo valor Conceptos/Operaciones = " + (sum)/100);
     }
 
     @Override
@@ -131,9 +128,6 @@ public class MovicsFileAnalyser extends AbstractFileAnalyser {
         Double importeTotal =  Double.parseDouble((cabecera
                 .substring(posiciónInicial,posiciónInicial+15)));
         Double importeTotalReal = 0.00;
-        if(cabecera.contains("VOLKSWAGEN ARGENTINA")){
-            System.out.println(cabecera);
-        }
 
         for (int i = 0; i < 8; i++) {
                 importeTotalReal += Double.parseDouble(cabecera
@@ -159,10 +153,9 @@ public class MovicsFileAnalyser extends AbstractFileAnalyser {
                     .substring(posiciónInicial+15+1,posiciónInicial+(15*2)+1));
 
 
-            super.writeOnLogFile("Viejo valor Conceptos/Operaciones = " + conceptoOperaciones.toString().replace(".0",""));
-            //if(conceptoOperaciones.toString().replace(".0","").equals("10000000015018E14")) System.out.println(comprobante.getCabecera());
+            super.writeOnLogFile("Viejo valor Conceptos/Operaciones = " + conceptoOperaciones/100);
             conceptoOperaciones += (importeTotal-importeTotalReal);
-            super.writeOnLogFile("Nuevo valor Conceptos/Operaciones = " + conceptoOperaciones.toString().replace(".0",""));
+            super.writeOnLogFile("Nuevo valor Conceptos/Operaciones = " + conceptoOperaciones/100);
             String newData = conceptoOperaciones.toString().replace(".0","");
             stringNumberParser.insert(0,FIFTEENZERO);
             if(newData.charAt(0) != '-') stringNumberParser.replace(15-newData.length(),15,newData );
@@ -173,8 +166,6 @@ public class MovicsFileAnalyser extends AbstractFileAnalyser {
             super.writeOnLogFile("\n");
         }
     }
-
-
 
     /*NOTA: No se si esta regla es real, me la dijo Juan, pero NO la especificaron desde Telefonica.*/
     @Override
@@ -203,7 +194,8 @@ public class MovicsFileAnalyser extends AbstractFileAnalyser {
     public void writeCorrectedComprobante(Comprobante comprobante){
         super.writeOnFixedFile(comprobante.getCabecera());
         for (int i = 0; i < comprobante.getAlicuotas().size(); i++) {
-            super.writeOnFixedFile(comprobante.getAlicuota(i));
+            super.writeOnFixedFile(comprobante.getAlicuota(i)
+                    +FREESPACE);
         }
     }
 }

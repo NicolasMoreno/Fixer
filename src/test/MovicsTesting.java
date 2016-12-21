@@ -46,9 +46,6 @@ public class MovicsTesting {
         assertEquals(correctHeading,comprobante.getCabecera());
         assertEquals(1,comprobante.getAlicuotas().size());
         assertEquals(correctAlicuota,comprobante.getAlicuota(0));
-        //movicsFileAnalyser.initSecondRule(comprobante);
-        //System.out.println(comprobante.getCabecera());
-        //System.out.println(comprobante.getAlicuota(0));
         comprobante.getAlicuotas().clear();
 
         comprobante.setCabecera("20151107006N209300000000000003259105000000000000032591058000000000020076189618SAINI               JORGE MARI0000000000018371000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000PES0001000000 6545737302427920151117000000000000000000000000000000000004471327000000411075220151201");
@@ -76,39 +73,7 @@ public class MovicsTesting {
         assertEquals(correctHeading,comprobante.getCabecera());
         assertEquals(correctAlicuota,comprobante.getAlicuota(0));
 
-
-
-
     }
-
-    @org.junit.Test
-    public void fileTesting() throws IOException {
-        // TODO: EN CASO DE HABER LA 1RA REGLA CASO B, QUE ELIMINA UNA LINEA, ESTO VA A FALLAR
-        this.comprobante = new Comprobante();
-        FileLoader fl = new FileLoader();
-        fl.start("C:\\Users\\nicolas.moreno\\IdeaProjects\\Fixer\\src\\main\\resources\\files\\","NUEVARGAFIP112015CRM.TXT");
-        BufferedReader originFileReader = new BufferedReader(new InputStreamReader(new FileInputStream(new File("C:\\Users\\nicolas.moreno\\IdeaProjects\\Fixer\\src\\main\\resources\\files\\NUEVARGAFIP112015CRM.TXT")),"Cp1252"));
-        BufferedReader fixedFileReader = new BufferedReader(new InputStreamReader(new FileInputStream(new File("C:\\Users\\nicolas.moreno\\IdeaProjects\\Fixer\\src\\main\\resources\\files\\NUEVARGAFIP112015CRM.NEW")),"Cp1252"));
-        int initFileLines = countLines(originFileReader);
-        int fixedFileLines = countLines(fixedFileReader);
-        System.out.println("originalFileLines " + initFileLines + " fixedFileLines " + fixedFileLines );
-        assertEquals(initFileLines,fixedFileLines);
-        }
-
-    private int countLines(BufferedReader reader) throws IOException {
-        int counter = 0;
-        String line = reader.readLine();
-        while ( line != null){
-            int cantAlicuotas = Integer.parseInt(line.substring(comprobante.getMovicsCBTESFieldPositions(10)-1
-                    , comprobante.getMovicsCBTESFieldPositions(11)-1));
-            for (int i = 0; i < cantAlicuotas; i++) {
-                reader.readLine();
-            }
-            counter++;
-            line = reader.readLine();
-        }
-        return counter;
-}
 
 
 }
