@@ -15,20 +15,22 @@ public class MainViewPanel extends JPanel {
 
     public MainViewPanel(){
 
-        this.setLayout(new GridLayout(2,2));
-        this.setSize(300,50);
+        this.setLayout(new GridLayout(4,0));
+        this.setSize(300,100);
 //        this.setBackground(Color.RED);
-        this.pathLabel = new JLabel("label path");
+        this.pathLabel = new JLabel(" Path de la carpeta");
         pathLabel.setSize(100,50);
-        this.pathInput = new JTextField("input path");
+        this.pathInput = new JTextField("");
         pathInput.setSize(90,50);
-        this.fileNameLabel = new JLabel("label fileName");
+        this.fileNameLabel = new JLabel(" Nombre del archivo junto con su extension (.TXT)");
         fileNameLabel.setSize(100,50);
-        this.fileNameInput = new JTextField("label path");
+        this.fileNameInput = new JTextField("");
         fileNameInput.setSize(90,50);
 
-        this.add(pathLabel); this.add(fileNameLabel);
-        this.add(pathInput); this.add(fileNameInput);
+        this.add(pathLabel);
+        this.add(pathInput);
+        this.add(fileNameLabel);
+        this.add(fileNameInput);
 
         this.setOpaque(true);
 

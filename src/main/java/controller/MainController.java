@@ -33,8 +33,10 @@ public class MainController {
                 String path = mainView.getPathInput().getText();
                 String fileName = mainView.getFileNameInput().getText();
                 fileLoader.start(path,fileName);
+                mainView.getStatusLabel().setText("Archivo Fixeado...");
             }catch (IOException exception){
-                System.out.println("Wrong path");
+                exception.printStackTrace();
+                mainView.getStatusLabel().setText("Error, check data input");
             }
         }
     }

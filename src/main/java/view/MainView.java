@@ -10,6 +10,7 @@ public class MainView extends JFrame {
 
     private MainViewPanel mainViewPanel;
     private JButton startFixButton;
+    private JLabel statusLabel;
 
     public MainView(){
 
@@ -21,9 +22,13 @@ public class MainView extends JFrame {
 
         this.mainViewPanel = new MainViewPanel();
         this.add(mainViewPanel);
-        this.startFixButton = new JButton("Start Fix");
-        startFixButton.setBounds(100,70,90,25);
+        this.startFixButton = new JButton("Iniciar");
+        startFixButton.setBounds(100,120,90,25);
         this.add(startFixButton);
+        this.statusLabel = new JLabel("Esperando para iniciar");
+        statusLabel.setBackground(Color.RED);
+        statusLabel.setBounds(90,170,160,25);
+        this.add(statusLabel);
 
 
         this.setVisible(true);
@@ -37,5 +42,9 @@ public class MainView extends JFrame {
     }
     public JTextField getFileNameInput(){
         return mainViewPanel.getFileNameInput();
+    }
+
+    public JLabel getStatusLabel() {
+        return statusLabel;
     }
 }

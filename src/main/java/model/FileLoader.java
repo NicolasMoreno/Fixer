@@ -24,5 +24,8 @@ public class FileLoader {
         else if(filename.toLowerCase().contains(".txt")){
             textAnalyser.analyse(new MovicsFileAnalyser(new File(path+filename)));
         }
+        else{
+            throw new IOException();
+        }
     }
 }
