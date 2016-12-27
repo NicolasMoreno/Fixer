@@ -14,19 +14,32 @@ public class MainViewPanel extends JPanel {
     private JTextField fileNameInput;
 
     public MainViewPanel(){
+
         this.setLayout(new GridLayout(2,2));
-        this.setSize(300,150);
-        //this.setBackground(Color.RED);
+        this.setSize(300,50);
+//        this.setBackground(Color.RED);
         this.pathLabel = new JLabel("label path");
         pathLabel.setSize(100,50);
         this.pathInput = new JTextField("input path");
-        pathInput.setSize(100,50);
+        pathInput.setSize(90,50);
         this.fileNameLabel = new JLabel("label fileName");
         fileNameLabel.setSize(100,50);
         this.fileNameInput = new JTextField("label path");
-        fileNameInput.setSize(100,50);
+        fileNameInput.setSize(90,50);
 
-        this.add(pathLabel, 0,0); this.add(fileNameLabel, 0,1);
-        this.add(pathLabel, 1,0); this.add(fileNameInput, 1,1);
+        this.add(pathLabel); this.add(fileNameLabel);
+        this.add(pathInput); this.add(fileNameInput);
+
+        this.setOpaque(true);
+
+
+    }
+
+    public JTextField getPathInput() {
+        return pathInput;
+    }
+
+    public JTextField getFileNameInput() {
+        return fileNameInput;
     }
 }

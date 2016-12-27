@@ -14,16 +14,28 @@ public class MainView extends JFrame {
     public MainView(){
 
 
-        this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setSize(270,300);
         this.setLayout(null);
+        this.setSize(325,300);
+
 
         this.mainViewPanel = new MainViewPanel();
         this.add(mainViewPanel);
+        this.startFixButton = new JButton("Start Fix");
+        startFixButton.setBounds(100,70,90,25);
+        this.add(startFixButton);
 
 
+        this.setVisible(true);
+    }
 
-
+    public JButton getStartFixButton() {
+        return startFixButton;
+    }
+    public JTextField getPathInput(){
+        return mainViewPanel.getPathInput();
+    }
+    public JTextField getFileNameInput(){
+        return mainViewPanel.getFileNameInput();
     }
 }

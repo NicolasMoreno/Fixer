@@ -20,21 +20,18 @@ abstract public class AbstractFileAnalyser {
     }
     /**
      * Metodo para ejecutar la primera regla
-     * @param comprobante Aca se encuentran las lineas del file, metidas en un ArrayList de String
+     * @param comprobante Aca se encuentran las lineas del file, en un String como la cabecera y
+     *                    en un ArrayList de String como los detalles
      */
     abstract public void initFirstRule(Comprobante comprobante);
 
     /**
      * Método para ejecutar la segunda regla
-     * @param comprobante Aca se encuentran las lineas del file, metidas en un ArrayList de String
+     * @param comprobante Aca se encuentran las lineas del file, en un String como la cabecera y
+     *                    en un ArrayList de String como los detalles
      */
     abstract public void initSecondRule(Comprobante comprobante);
-
-    /**
-     * Método para ejecutar la tercera regla
-     * @param comprobante Aca se encuentran las lineas del file, metidas en un ArrayList de String
-     */
-
+    
     /**
      * Metodo para escribir al archivo .NEW, con el comprobante corregido
      * @param comprobante Comprobante corregido luego de pasar por las reglas.
