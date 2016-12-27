@@ -1,4 +1,5 @@
 import model.FileLoader;
+import view.MainView;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -22,5 +23,6 @@ public class Main {
             System.out.println("Error al cargar archivo, checkee los valores ingresados");
             e.printStackTrace();
         }
+//        new MainView();
     }
 }

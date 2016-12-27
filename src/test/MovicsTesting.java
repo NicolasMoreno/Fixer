@@ -1,5 +1,4 @@
 import model.Comprobante;
-import model.FileLoader;
 import model.MovicsFileAnalyser;
 
 import java.io.*;
@@ -74,6 +73,8 @@ public class MovicsTesting {
         assertEquals(correctAlicuota,comprobante.getAlicuota(0));
 
     }
+
+
 
 
 }

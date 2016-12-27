@@ -1,5 +1,7 @@
 package model;
 
+import java.util.HashSet;
+
 /**
  * Created by nicolas.moreno on 21/11/2016.
  */
@@ -57,7 +59,6 @@ public class TextAnalyser {
             }
             file.initFirstRule(comprobante);
             file.initSecondRule(comprobante);
-            //file.initThirdRule(comprobante);
             file.writeCorrectedComprobante(comprobante);
             header = file.readLine();
         }

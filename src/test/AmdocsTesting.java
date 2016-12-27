@@ -52,6 +52,31 @@ public class AmdocsTesting {
         assertEquals(correctAlicuota1,comprobante.getAlicuota(0));
         assertEquals(1,(comprobante.getAlicuotas().size()));
         comprobante.getAlicuotas().clear();
+
+
+        /* no rules applies on these ones*/
+        correctAlicuota1 = "1,20160801,08,N,2101,00003306,CB210100003306,DNI,17611448,MAMANI MARIA DE LOS AN,-150.00,.00,-123.97,21,-26.03,.00,.00,.00,.00,.00,.00,.00,F,PES,0001000000,1,,66317359966211,20160811,-,17782544|17782544";
+        comprobante.setCabecera("1,20160801,08,N,2101,00003306,CB210100003306,DNI,17611448,MAMANI MARIA DE LOS AN,-150.00,.00,-123.97,21,-26.03,.00,.00,.00,.00,.00,.00,.00,F,PES,0001000000,1,,66317359966211,20160811,-,17782544|17782544");
+        comprobante.addAlicuota("1,20160801,08,N,2101,00003306,CB210100003306,DNI,17611448,MAMANI MARIA DE LOS AN,-150.00,.00,-123.97,21,-26.03,.00,.00,.00,.00,.00,.00,.00,F,PES,0001000000,1,,66317359966211,20160811,-,17782544|17782544");
+        amdocsFileAnalyser.initFirstRule(comprobante);
+        amdocsFileAnalyser.initSecondRule(comprobante);
+        assertEquals(correctAlicuota1,comprobante.getAlicuota(0));
+        comprobante.getAlicuotas().clear();
+        correctAlicuota1 = "1,20160801,08,N,2101,00003313,CB210100003313,DNI,32111284,KELLENBERGER JOSE HORACIO,-1.00,.00,-.83,21,-.17,.00,.00,.00,.00,.00,.00,.00,F,PES,0001000000,1,,66317365463638,20160811,-,13622754|13622754";
+        comprobante.setCabecera("1,20160801,08,N,2101,00003313,CB210100003313,DNI,32111284,KELLENBERGER JOSE HORACIO,-1.00,.00,-.83,21,-.17,.00,.00,.00,.00,.00,.00,.00,F,PES,0001000000,1,,66317365463638,20160811,-,13622754|13622754");
+        comprobante.addAlicuota("1,20160801,08,N,2101,00003313,CB210100003313,DNI,32111284,KELLENBERGER JOSE HORACIO,-1.00,.00,-.83,21,-.17,.00,.00,.00,.00,.00,.00,.00,F,PES,0001000000,1,,66317365463638,20160811,-,13622754|13622754");
+        amdocsFileAnalyser.initFirstRule(comprobante);
+        amdocsFileAnalyser.initSecondRule(comprobante);
+        assertEquals(correctAlicuota1,comprobante.getAlicuota(0));
+        comprobante.getAlicuotas().clear();
+        correctAlicuota1 = "1,20160801,08,N,2101,00003319,CB210100003319,DNI,35050734,ADET JUAN MARTIN,-129.00,.00,-106.61,21,-22.39,.00,.00,.00,.00,.00,.00,.00,F,PES,0001000000,1,,66317368256006,20160811,-,27484614|27484614";
+        comprobante.setCabecera("1,20160801,08,N,2101,00003319,CB210100003319,DNI,35050734,ADET JUAN MARTIN,-129.00,.00,-106.61,21,-22.39,.00,.00,.00,.00,.00,.00,.00,F,PES,0001000000,1,,66317368256006,20160811,-,27484614|27484614");
+        comprobante.addAlicuota("1,20160801,08,N,2101,00003319,CB210100003319,DNI,35050734,ADET JUAN MARTIN,-129.00,.00,-106.61,21,-22.39,.00,.00,.00,.00,.00,.00,.00,F,PES,0001000000,1,,66317368256006,20160811,-,27484614|27484614");
+        amdocsFileAnalyser.initFirstRule(comprobante);
+        amdocsFileAnalyser.initSecondRule(comprobante);
+        assertEquals(correctAlicuota1,comprobante.getAlicuota(0));
+        comprobante.getAlicuotas().clear();
+
     }
 
     @org.junit.Test

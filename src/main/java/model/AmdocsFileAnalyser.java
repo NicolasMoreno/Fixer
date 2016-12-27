@@ -13,6 +13,7 @@ public class AmdocsFileAnalyser extends AbstractFileAnalyser {
 
     private StringBuilder stringBuilder;
 
+
     public AmdocsFileAnalyser(File file) throws IOException{
         super(file);
         this.stringBuilder = new StringBuilder();
@@ -21,9 +22,6 @@ public class AmdocsFileAnalyser extends AbstractFileAnalyser {
     @Override
     public void initFirstRule(Comprobante comprobante) {
         int cantidadAlícuotas = (comprobante.getAlicuotas().size());
-        if(cantidadAlícuotas> 1){
-            System.out.println(cantidadAlícuotas);
-        }
         initFirstRule(comprobante,cantidadAlícuotas);
 
     }
@@ -36,7 +34,6 @@ public class AmdocsFileAnalyser extends AbstractFileAnalyser {
         BigDecimal sumaDeImportes = new BigDecimal(0.00);
         for (int i = 0; i < cantAlicuota; i++) {
             splittedAlicuota = comprobante.getAlicuota(i).split(",");
-
             for (int j = 0; j < 10 ; j++) {
                 if(j!=2){
                     sumaDeImportes = sumaDeImportes.add(new BigDecimal(Double.parseDouble((splittedAlicuota[11 + j].replaceAll("\u0000","")))));
@@ -69,9 +66,6 @@ public class AmdocsFileAnalyser extends AbstractFileAnalyser {
     public void initSecondRule(Comprobante comprobante) {
         String[] splittedAlicuota;
         int cantidadAlícuotas = (comprobante.getAlicuotas().size());
-        if(cantidadAlícuotas> 1){
-            System.out.println(cantidadAlícuotas);
-        }
         for (int i = 0; i < cantidadAlícuotas; i++) {
             splittedAlicuota = comprobante.getAlicuota(i).split(",");
             if(splittedAlicuota[14].replaceAll("\u0000","").equals(".00")
@@ -89,6 +83,12 @@ public class AmdocsFileAnalyser extends AbstractFileAnalyser {
         }
     }
 
+    /**
+     * Método privado para ejecutar la 2da regla caso B.
+     * NOTA: utilizo el relpaceAll porque entre cada caracter se encuentra un caracter nulo "\u0000"
+     * @param comprobante comprobante a ejecutar la regla
+     * @param index posición del detalle a eliminar de la lista.
+     */
     private void toCorrectCaseB(Comprobante comprobante, int index) {
         String splittedAlicuota[] = comprobante.getAlicuota(index).split(",");
         String name = splittedAlicuota[9];
@@ -138,9 +138,6 @@ public class AmdocsFileAnalyser extends AbstractFileAnalyser {
 
     }
 
-    @Override
-    public void initThirdRule(Comprobante comprobante) {
-    }
 
     @Override
     public void writeCorrectedComprobante(Comprobante comprobante) {

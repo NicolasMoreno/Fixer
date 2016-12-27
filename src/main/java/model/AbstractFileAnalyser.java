@@ -34,7 +34,6 @@ abstract public class AbstractFileAnalyser {
      * Método para ejecutar la tercera regla
      * @param comprobante Aca se encuentran las lineas del file, metidas en un ArrayList de String
      */
-    abstract public void initThirdRule(Comprobante comprobante);
 
     /**
      * Metodo para escribir al archivo .NEW, con el comprobante corregido
