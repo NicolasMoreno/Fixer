@@ -8,9 +8,11 @@ import java.util.HashSet;
 public class TextAnalyser {
 
     private Comprobante comprobante;
+    HashSet<String> keys;
 
     public TextAnalyser(){
         this.comprobante =  new Comprobante();
+        this.keys = new HashSet<>();
     }
 
     /**
@@ -48,12 +50,20 @@ public class TextAnalyser {
      * @param file Archivo amdocs a ser analizado
      */
     public void analyse(MovicsFileAnalyser file){
+        keys.clear();
         String header = file.readLine();
         while (header != null){
             comprobante.getAlicuotas().clear();
             comprobante.setCabecera(header.trim());
+            String tipoComprobante = header.substring(comprobante.getMovicsCBTESFieldPositions(1)-1
+                    ,comprobante.getMovicsCBTESFieldPositions(2)-1);
+            String nroComprobante = tipoComprobante + header.substring(comprobante.getMovicsCBTESFieldPositions(3)-1
+                    ,comprobante.getMovicsCBTESFieldPositions(5)-1);
             int cantAlicuotas = Integer.parseInt(header.substring(comprobante.getMovicsCBTESFieldPositions(10)-1
                     , comprobante.getMovicsCBTESFieldPositions(11)-1));
+            if(keys.contains(nroComprobante)){
+                file.writeOnLogFile("WARNING : KEY= " + nroComprobante + " ALREADY EXISTS ->");
+            }else keys.add(nroComprobante);
             for (int i = 0; i < cantAlicuotas; i++) {
                 comprobante.addAlicuota(file.readLine().trim());
             }
