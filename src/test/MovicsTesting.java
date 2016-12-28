@@ -2,6 +2,7 @@ import model.Comprobante;
 import model.MovicsFileAnalyser;
 
 import java.io.*;
+import java.util.HashSet;
 
 
 import static org.junit.Assert.assertEquals;
@@ -75,6 +76,35 @@ public class MovicsTesting {
     }
 
 
+    /**
+     * Metodo que checkea si hay ids duplicados en los comprobantes.
+     * si hay alguno, imprime el id duplicado. Luego imprime la cantidad de ids duplicados.
+     */
+    @org.junit.Test
+    public void duplicatedKeyVerifier(){
+        int duplicatedIds = 0;
+        comprobante = new Comprobante();
+        HashSet<String> keys = new HashSet<>();
+        String line = movicsFileAnalyser.readLine();
+        while (line != null){
+            String tipoComprobante = line.substring(comprobante.getMovicsCBTESFieldPositions(1)-1
+                    ,comprobante.getMovicsCBTESFieldPositions(2)-1);
+            String nroComprobante = tipoComprobante + line.substring(comprobante.getMovicsCBTESFieldPositions(3)-1
+                    ,comprobante.getMovicsCBTESFieldPositions(5)-1);
+            int nroDetalles = Integer.parseInt(line.substring(comprobante.getMovicsCBTESFieldPositions(10)-1
+                    , comprobante.getMovicsCBTESFieldPositions(11)-1));
+            if(keys.contains(nroComprobante)){
+                System.out.println(nroComprobante);
+                duplicatedIds++;
+            }else keys.add(nroComprobante);
+            for (int i = 0; i < nroDetalles; i++) {
+                movicsFileAnalyser.readLine();
+            }
+            line = movicsFileAnalyser.readLine();
+
+        }
+        System.out.println(duplicatedIds);
+    }
 
 
 }

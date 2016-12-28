@@ -26,7 +26,6 @@ public class MainView extends JFrame {
         startFixButton.setBounds(100,120,90,25);
         this.add(startFixButton);
         this.statusLabel = new JLabel("Esperando para iniciar");
-        statusLabel.setBackground(Color.RED);
         statusLabel.setBounds(90,170,160,25);
         this.add(statusLabel);
 
