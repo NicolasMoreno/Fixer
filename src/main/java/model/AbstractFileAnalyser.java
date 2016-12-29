@@ -38,10 +38,6 @@ abstract public class AbstractFileAnalyser {
      */
     abstract public void writeCorrectedComprobante(Comprobante comprobante);
 
-    public BufferedReader getReader() {
-        return reader;
-    }
-
     public String readLine(){
         try{
             return reader.readLine();

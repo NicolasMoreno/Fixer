@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -8,11 +10,13 @@ import java.util.HashSet;
 public class TextAnalyser {
 
     private Comprobante comprobante;
-    HashSet<String> keys;
+    private HashMap<String,String> keys;
+    private ArrayList<String> toEliminateList;
 
     public TextAnalyser(){
         this.comprobante =  new Comprobante();
-        this.keys = new HashSet<>();
+        this.keys = new HashMap<>();
+        this.toEliminateList = new ArrayList<>();
     }
 
     /**
@@ -55,15 +59,20 @@ public class TextAnalyser {
         while (header != null){
             comprobante.getAlicuotas().clear();
             comprobante.setCabecera(header.trim());
+            String fechaComprobante = header.substring(comprobante.getMovicsCBTESFieldPositions(0)-1
+                    ,comprobante.getMovicsCBTESFieldPositions(1)-1);
             String tipoComprobante = header.substring(comprobante.getMovicsCBTESFieldPositions(1)-1
                     ,comprobante.getMovicsCBTESFieldPositions(2)-1);
             String nroComprobante = tipoComprobante + header.substring(comprobante.getMovicsCBTESFieldPositions(3)-1
-                    ,comprobante.getMovicsCBTESFieldPositions(5)-1);
+                    ,comprobante.getMovicsCBTESFieldPositions(5)-1); //Obtenemos el ID del comprobante
             int cantAlicuotas = Integer.parseInt(header.substring(comprobante.getMovicsCBTESFieldPositions(10)-1
                     , comprobante.getMovicsCBTESFieldPositions(11)-1));
-            if(keys.contains(nroComprobante)){
-                file.writeOnLogFile("WARNING : KEY= " + nroComprobante + " ALREADY EXISTS ->");
-            }else keys.add(nroComprobante);
+            if(keys.containsKey(nroComprobante)){
+//                file.writeOnLogFile("WARNING : KEY= " + nroComprobante + " ALREADY EXISTS ->");
+                // HAY QUE COMPRARA FECHAS, VER DATE O CALENDAR
+
+                //Por ahora solo notificamos en el LOG que hay una key repetida.
+            }else keys.put(nroComprobante,fechaComprobante);
             for (int i = 0; i < cantAlicuotas; i++) {
                 comprobante.addAlicuota(file.readLine().trim());
             }

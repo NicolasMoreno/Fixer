@@ -23,7 +23,7 @@ public class TextWriter {
             this.archivoLog = new File(file.getParent()+"/"+file.getName().toLowerCase().replace(".txt","")
                     .toUpperCase()+".LOG");
         }
-        if(file.getName().toLowerCase().contains(".csv")){
+        else if(file.getName().toLowerCase().contains(".csv")){
             this.state = TypeFileState.AMDOCSFILE;
             this.archivoFixed = new File(file.getParent()+"/"+file.getName().toLowerCase().replace(".csv","")
                     .toUpperCase()+".NEW");
@@ -46,6 +46,7 @@ public class TextWriter {
     }
 
     public void writeOnFixedFile(String line) throws IOException {
+        // El archivo amdocs ya tiene el \r al fin de linea (supongo). Si lo incluis genera unos caracteres raros.
         if(state == TypeFileState.AMDOCSFILE) fixedFileWriter.write(line+"\n");
         if(state == TypeFileState.MOVICSFILE) fixedFileWriter.write(line+"\r\n");
     }
