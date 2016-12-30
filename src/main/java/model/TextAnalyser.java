@@ -68,10 +68,8 @@ public class TextAnalyser {
             int cantAlicuotas = Integer.parseInt(header.substring(comprobante.getMovicsCBTESFieldPositions(10)-1
                     , comprobante.getMovicsCBTESFieldPositions(11)-1));
             if(keys.containsKey(nroComprobante)){
-//                file.writeOnLogFile("WARNING : KEY= " + nroComprobante + " ALREADY EXISTS ->");
-                // HAY QUE COMPRARA FECHAS, VER DATE O CALENDAR
+                // TODO HAY QUE COMPRARAR FECHAS, VER  JAVA.DATE O JAVA.CALENDAR
 
-                //Por ahora solo notificamos en el LOG que hay una key repetida.
             }else keys.put(nroComprobante,fechaComprobante);
             for (int i = 0; i < cantAlicuotas; i++) {
                 comprobante.addAlicuota(file.readLine().trim());
